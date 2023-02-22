@@ -19,14 +19,14 @@ const TableHeader = ({ columns }) => {
 
       return (
         <Cell key={title} className={cell.className}>
-          <div>{title}</div>
+          <td>{title}</td>
           {isSortable ? '&' : null}
         </Cell>
       );
     });
   }, [columns]);
 
-  return <div className={styles.tableRow}>{renderHeaderCells}</div>;
+  return <thead className={styles.tableRow}>{renderHeaderCells}</thead>;
 };
 
 export default TableHeader;

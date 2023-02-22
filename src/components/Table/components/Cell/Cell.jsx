@@ -4,7 +4,7 @@ import cn from 'classnames';
 import styles from './Cell.module.scss';
 
 const Cell = ({ children, className }) => {
-  return <div className={cn(styles.cell, className)}>{children}</div>;
+  return <td className={cn(styles.cell, className)}>{children}</td>;
 };
 
 export default Cell;

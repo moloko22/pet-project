@@ -7,7 +7,7 @@ const TableBody = ({ list, columns }) => {
   const renderBodyCells = useMemo(() => {
     return list.map((cell) => {
       return (
-        <div className={styles.tableRow}>
+        <tr className={styles.tableRow}>
           {columns.map((col) => {
             if (typeof col.renderCell === 'function') {
               return (
@@ -23,12 +23,12 @@ const TableBody = ({ list, columns }) => {
               </Cell>
             );
           })}
-        </div>
+        </tr>
       );
     });
   }, [list, columns]);
 
-  return <div className={styles.row}>{renderBodyCells}</div>;
+  return <tbody className={styles.row}>{renderBodyCells}</tbody>;
 };
 
 export default TableBody;
