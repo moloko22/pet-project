@@ -1,0 +1,21 @@
+.button {
+  background-color: #ffa500;
+  cursor: pointer;
+  height: 36px;
+  width: 144px;
+  border: 1px solid #ffa500;
+  border-radius: 4px;
+
+  &:hover:not(:disabled) {
+    background-color: #ff8c00;
+  }
+
+  &:active:not(:disabled) {
+    background-color: #ffa500;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
+}
