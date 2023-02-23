@@ -5,28 +5,31 @@ import styles from '../../Table.module.scss';
 
 const TableHeader = ({ columns }) => {
   const renderHeaderCells = useMemo(() => {
-    return columns.map((cell) => {
-      const { title, isSortable, key } = cell;
-
-      if (typeof title === 'function') {
-        return (
-          <Cell key={title} className={cell.className}>
-            {cell.title()}
-            {isSortable ? '&' : null}
-          </Cell>
-        );
-      }
+    return columns.map((col, index) => {
+      const { title, isSortable, className, isSticky, width } = col;
+      const leftStickyPosition = isSticky
+        ? `${index === 0 ? 0 : width}px`
+        : null;
 
       return (
-        <Cell key={title} className={cell.className}>
-          <td>{title}</td>
+        <Cell
+          key={title}
+          className={className}
+          isSticky={isSticky}
+          style={{
+            minWidth: `${width}px`,
+            maxWidth: `${width}px`,
+            left: leftStickyPosition,
+          }}
+        >
+          {typeof title === 'function' ? title() : title}
           {isSortable ? '&' : null}
         </Cell>
       );
     });
   }, [columns]);
 
-  return <thead className={styles.tableRow}>{renderHeaderCells}</thead>;
+  return <div className={styles.tableRow}>{renderHeaderCells}</div>;
 };
 
 export default TableHeader;

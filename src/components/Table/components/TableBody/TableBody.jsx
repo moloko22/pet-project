@@ -7,28 +7,33 @@ const TableBody = ({ list, columns }) => {
   const renderBodyCells = useMemo(() => {
     return list.map((cell) => {
       return (
-        <tr className={styles.tableRow}>
-          {columns.map((col) => {
-            if (typeof col.renderCell === 'function') {
-              return (
-                <Cell key={col.id} className={col.className}>
-                  <div>{col.renderCell(cell)}</div>
-                </Cell>
-              );
-            }
+        <div className={styles.tableRow}>
+          {columns.map((col, index) => {
+            const leftStickyPosition = col.isSticky
+              ? `${index === 0 ? 0 : col.width}px`
+              : null;
 
             return (
-              <Cell key={col.id} className={col.className}>
-                <div>-</div>
+              <Cell
+                key={cell.id}
+                className={col.className}
+                isSticky={col.isSticky}
+                style={{
+                  minWidth: `${col.width}px`,
+                  maxWidth: `${col.width}px`,
+                  left: leftStickyPosition,
+                }}
+              >
+                <div>{col.renderCell(cell)}</div>
               </Cell>
             );
           })}
-        </tr>
+        </div>
       );
     });
   }, [list, columns]);
 
-  return <tbody className={styles.row}>{renderBodyCells}</tbody>;
+  return <div className={styles.row}>{renderBodyCells}</div>;
 };
 
 export default TableBody;
